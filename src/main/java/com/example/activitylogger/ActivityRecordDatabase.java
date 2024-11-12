@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityRecordDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "activitydatabase.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 17;
 
     public static final String TABLE_NAME = "activity";
     public static final String COLUMN_ID = "_id";
@@ -73,6 +73,7 @@ public class ActivityRecordDatabase extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
             ActivityRecord record = new ActivityRecord(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DISTANCE)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME)),
@@ -95,6 +96,7 @@ public class ActivityRecordDatabase extends SQLiteOpenHelper {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 ActivityRecord record = new ActivityRecord(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DISTANCE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
                         cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CALORY)),
@@ -106,6 +108,22 @@ public class ActivityRecordDatabase extends SQLiteOpenHelper {
             cursor.close();
         }
         return records;
+    }
+    public void deleteActivityRecord(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+    public void updateActivityRecord(ActivityRecord record) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DISTANCE, record.get_distance());
+        values.put(COLUMN_DATE, record.get_date());
+        values.put(COLUMN_CALORY, record.get_calory());
+        values.put(COLUMN_ACTIVITY_TYPE, record.get_activity_type());
+        values.put(COLUMN_TIME, record.get_time());
+        db.update(TABLE_NAME, values, COLUMN_ID + "=?", new String[]{String.valueOf(record.get_id())});
+        db.close();
     }
 }
 

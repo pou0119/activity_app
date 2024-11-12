@@ -25,4 +25,11 @@ public class ActivityRecordManager {
         return records;
     }
 
+    public void deleteActivityRecord(int id) {
+        dbHelper.deleteActivityRecord(id);
+    }
+    public void updateActivityRecord(ActivityRecord record) {
+        dbHelper.updateActivityRecord(record);
+    }
+
 }

@@ -18,7 +18,6 @@ public class ActivityRecord {
 //    private Character user_sex;
 
     public ActivityRecord() {
-        this.id = null;
         this.date = null;
         this.distance ="0";
         this.time = null;
@@ -30,12 +29,13 @@ public class ActivityRecord {
 //        this.user_age = null;
 //        this.user_sex = null;
     }
-    public ActivityRecord(String distance, String date,String calory, String activity_type, String time) {
+    public ActivityRecord(int id,String distance, String date,String calory, String activity_type, String time) {
         this.distance = distance;
         this.calory = calory;
         this.activity_type = activity_type;
         this.time = time;
         this.date=date;
+        this.id=id;
     }
 
     public void set_id(Integer id) { this.id = id; }

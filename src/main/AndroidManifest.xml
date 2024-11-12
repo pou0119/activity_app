@@ -23,6 +23,8 @@
         </activity>
 
         <activity android:name=".ActivityList"></activity>
+        <activity android:name=".EditActivityRecord"></activity>
+
         <activity android:name=".ActivityAction" android:exported="true" />
     </application>
 
