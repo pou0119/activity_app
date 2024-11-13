@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ActivityRecordDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "activitydatabase.db";
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 20;
 
     public static final String TABLE_NAME = "activity";
     public static final String COLUMN_ID = "_id";
@@ -74,11 +74,11 @@ public class ActivityRecordDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
             ActivityRecord record = new ActivityRecord(
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DISTANCE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CALORY)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ACTIVITY_TYPE))
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ACTIVITY_TYPE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME))
 
             );
             cursor.close();

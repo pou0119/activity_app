@@ -35,7 +35,7 @@ public class ActivityRecordAdapter extends ArrayAdapter<ActivityRecord> {
         TextView timeTextView = convertView.findViewById(R.id.timeTextView);
         TextView dateTextView = convertView.findViewById(R.id.dateTextView);
 
-        distanceTextView.setText(record.get_distance());
+        distanceTextView.setText("距離："+record.get_distance()+"km");
         caloryTextView.setText("カロリー:" + record.get_calory() + "kcal" );
         activityTypeTextView.setText(record.get_activity_type());
         timeTextView.setText(formatElapsedTime(record.get_time()));

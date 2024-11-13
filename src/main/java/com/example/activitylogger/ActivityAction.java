@@ -148,7 +148,7 @@ public class ActivityAction extends AppCompatActivity {
         previousLocation = location;
 
         // 距離をキロメートル単位で表示
-        String distanceText = String.format("距離: %.1f km", totalDistance / 1000);
+        String distanceText = String.format("%.1f", totalDistance / 1000);
         distancesam = distanceText;
     }
 
@@ -167,7 +167,7 @@ public class ActivityAction extends AppCompatActivity {
 
         calory_data = String.format("%.1f", calory);
         String timeText = String.format("時間: %02d:%02d:%02d:%02d", hours, minutes, seconds, milliseconds);
-        locationTextView.setText(formattedDate+"\n" +activity_title+ "\n" +distancesam + "\n" + timeText+"\n"+"カロリー:"+calory_data+"kcal"); // 時間を追加
+        locationTextView.setText(formattedDate+"\n" +activity_title+ "\n" +"距離："+distancesam +"km"+ "\n" + timeText+"\n"+"カロリー:"+calory_data+"kcal"); // 時間を追加
     }
 
     @Override

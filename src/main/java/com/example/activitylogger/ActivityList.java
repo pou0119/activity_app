@@ -103,21 +103,33 @@ public class ActivityList extends AppCompatActivity {
 
 
 
-    private void deleteRecord(int position) {
-        ActivityRecord record = records.get(position);
-        if (record != null) {
-            Integer recordId = record.get_id(); // ここで`Integer`オブジェクトを取得
-            if (recordId != null) {
-                recordManager.deleteActivityRecord(record.get_id());
-                records.remove(position);
-                adapter.notifyDataSetChanged();
-            } else {
-                Log.e("ActivityList", "Record ID is null");
-            }
-        } else {
-            Log.e("ActivityList", "Record is null");
-        }
+    private void deleteRecord(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("確認")
+                .setMessage("本当に削除しますか？")
+                .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityRecord record = records.get(position);
+                        if (record != null) {
+                            Integer recordId = record.get_id(); // ここで`Integer`オブジェクトを取得
+                            if (recordId != null) {
+                                recordManager.deleteActivityRecord(record.get_id());
+                                records.remove(position);
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                Log.e("ActivityList", "Record ID is null");
+                            }
+                        } else {
+                            Log.e("ActivityList", "Record is null");
+                        }
+                    }
+                })
+                .setNegativeButton("いいえ", null)
+                .create()
+                .show();
     }
+
 
     @Override
     protected void onResume() {
