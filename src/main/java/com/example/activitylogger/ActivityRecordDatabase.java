@@ -1,4 +1,3 @@
-// ファイル名: ActivityRecordDatabase.java
 package com.example.activitylogger;
 
 import android.content.ContentValues;
