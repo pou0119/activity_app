@@ -44,10 +44,20 @@ public class ActivityList extends AppCompatActivity {
         });
 
         Button buttonback = findViewById(R.id.homebutton);
+        Button createbutton = findViewById(R.id.createbutton);
         buttonback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityList.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        createbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityList.this, EditActivityRecord.class);
+                int recordId = 1; // これは実際のレコードIDに置き換えてください
+                intent.putExtra("a",recordId);
                 startActivity(intent);
             }
         });
@@ -98,6 +108,8 @@ public class ActivityList extends AppCompatActivity {
         ActivityRecord record = records.get(position);
         Intent intent = new Intent(ActivityList.this, EditActivityRecord.class);
         intent.putExtra("record_id", record.get_id());
+        int recordId = -1; // これは実際のレコードIDに置き換えてください
+        intent.putExtra("a",recordId);
         startActivity(intent);
     }
 

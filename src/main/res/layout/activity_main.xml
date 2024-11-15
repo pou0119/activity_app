@@ -59,4 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView android:id="@+id/targetDistance" android:layout_width="0dp" android:layout_height="wrap_content" android:text="目標距離: " app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/startbutton" android:layout_marginTop="16dp" android:layout_marginStart="16dp" /> <TextView android:id="@+id/wishName" android:layout_width="0dp" android:layout_height="wrap_content" android:text="ほしいもの: " app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/targetDistance" android:layout_marginTop="16dp" android:layout_marginStart="16dp" /> <ImageView android:id="@+id/wishImage" android:layout_width="0dp" android:layout_height="200dp" android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/wishName" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:contentDescription="ほしいものの画像" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

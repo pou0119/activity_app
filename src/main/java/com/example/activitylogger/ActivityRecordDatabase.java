@@ -125,6 +125,7 @@ public class ActivityRecordDatabase extends SQLiteOpenHelper {
         db.update(TABLE_NAME, values, COLUMN_ID + "=?", new String[]{String.valueOf(record.get_id())});
         db.close();
     }
+
 }
 
 
