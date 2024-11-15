@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonstart=findViewById(R.id.startbutton);
         targetDatabaseManager = new TargetDatabaseManager(this);
 
-//        loadTargetData();
+        loadTargetData();
 
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,10 +101,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void loadTargetData() {
-        TargetRecord targetRecord = targetDatabaseManager.getTargetRecordById(1);
-        if (targetRecord != null) { targetDistance.setText("目標距離: " + targetRecord.getTarget());
-            wishName.setText("ほしいもの: " + targetRecord.getWishName());
-            wishImage.setImageURI(Uri.parse(targetRecord.getWishImage()));
+        try {
+            TargetRecord targetRecord = targetDatabaseManager.getTargetRecordById(1);
+            if (targetRecord != null) {
+                targetDistance.setText("目標距離: " + targetRecord.getTarget());
+                wishName.setText("ほしいもの: " + targetRecord.getWishName());
+                String imageUriString = targetRecord.getWishImage();
+                if (imageUriString != null && !imageUriString.isEmpty()) {
+                    Uri imageUri = Uri.parse(imageUriString);
+                    Log.d("MainActivity", "画像URI: " + imageUri);
+                    // URIを設定して画像が表示されるか確認
+                    wishImage.setImageURI(imageUri);
+                } else {
+                    wishImage.setImageResource(R.drawable.default_image); // デフォルト画像を設定
+                }
+            } else {
+                targetDistance.setText("目標距離: データなし");
+                wishName.setText("ほしいもの: データなし");
+                wishImage.setImageResource(R.drawable.default_image); // デフォルト画像を設定
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "データの読み込みに失敗しました", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
