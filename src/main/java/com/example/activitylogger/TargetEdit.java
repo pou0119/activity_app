@@ -3,9 +3,12 @@ package com.example.activitylogger;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class TargetEdit extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -114,9 +122,50 @@ public class TargetEdit extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             imageView.setImageURI(imageUri);
-            editWishImage.setText(imageUri.toString());
+
+            // 画像をストレージに保存し、そのパスを取得
+            String imagePath = saveImageToStorage(imageUri);
+            if (imagePath != null) {
+                editWishImage.setText(imagePath);
+            } else {
+                Toast.makeText(this, "画像の保存に失敗しました", Toast.LENGTH_SHORT).show();
+            }
         }
     }
+
+
+
+    private String saveImageToStorage(Uri imageUri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+            File storageDir;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            } else {
+                storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            }
+
+            if (!storageDir.exists() && !storageDir.mkdirs()) {
+                return null;
+            }
+
+            String fileName = "image_" + System.currentTimeMillis() + ".png";
+            File file = new File(storageDir, fileName);
+            FileOutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+
+            outputStream.flush();
+            outputStream.close();
+            return file.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     private void saveTargetRecord() {
         String target = editTargetDistance.getText().toString().trim();
