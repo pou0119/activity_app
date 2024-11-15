@@ -187,6 +187,7 @@ public class TargetEdit extends AppCompatActivity {
 
         targetDatabaseManager.addTargetRecord(newRecord);
         Toast.makeText(this, "ターゲットが保存されました", Toast.LENGTH_SHORT).show();
-        finish();
+        Intent intent = new Intent(TargetEdit.this, MainActivity.class);
+        startActivity(intent);
     }
 }
