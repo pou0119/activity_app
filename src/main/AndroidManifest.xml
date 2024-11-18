@@ -30,6 +30,7 @@
         <activity android:name=".ActivityList"></activity>
         <activity android:name=".EditActivityRecord"></activity>
         <activity android:name=".TargetEdit" />
+        <activity android:name=".TargetListActivity" android:exported="true"></activity>
 
 
         <activity android:name=".ActivityAction" android:exported="true" />

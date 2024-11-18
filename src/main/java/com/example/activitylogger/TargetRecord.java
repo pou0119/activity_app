@@ -6,14 +6,16 @@ public class TargetRecord {
     private boolean targetSetAccomplished; // 目標達成フラグ
     private String wishName; // 目標の名前
     private String wishImage; // 目標の画像URLまたはパス
+    private boolean TargetMain;//どの目標を選択しているか
 
     // コンストラクタ
-    public TargetRecord(int id, String target, boolean targetSetAccomplished, String wishName, String wishImage) {
+    public TargetRecord(int id, String target, boolean targetSetAccomplished, String wishName, String wishImage,boolean targetmain) {
         this.id = id;
         this.target = target;
         this.targetSetAccomplished = targetSetAccomplished;
         this.wishName = wishName;
         this.wishImage = wishImage;
+        this.TargetMain=targetmain;
     }
 
     // ゲッターとセッター
@@ -55,5 +57,12 @@ public class TargetRecord {
 
     public void setWishImage(String wishImage) {
         this.wishImage = wishImage;
+    }
+
+    public Boolean gettargetmain(){
+        return  TargetMain;
+    }
+    public void settargetmain(Boolean targetmain){
+        this.TargetMain=targetmain;
     }
 }

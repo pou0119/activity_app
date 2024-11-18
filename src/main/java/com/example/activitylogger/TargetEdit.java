@@ -34,7 +34,7 @@ public class TargetEdit extends AppCompatActivity {
     private EditText editTargetDistance, editWishName;
     private TextView editWishImage;
     private ImageView imageView;
-    private Button saveButton, backButton;
+    private Button saveButton, backButton,listButton;
     private Uri imageUri;
 
     private TargetDatabaseManager targetDatabaseManager;
@@ -52,6 +52,16 @@ public class TargetEdit extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         imageView = findViewById(R.id.imageView);
         backButton = findViewById(R.id.backButton);
+        listButton = findViewById(R.id.ListButton);
+
+
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TargetEdit.this, TargetListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         editWishImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +192,8 @@ public class TargetEdit extends AppCompatActivity {
                 target,
                 false,
                 wishName,
-                wishImage
+                wishImage,
+                false
         );
 
         targetDatabaseManager.addTargetRecord(newRecord);

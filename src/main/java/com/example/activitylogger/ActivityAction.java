@@ -158,14 +158,14 @@ public class ActivityAction extends AppCompatActivity {
         int minutes = (int) ((elapsedTime / (1000 * 60)) % 60);
         int hours = (int) ((elapsedTime / (1000 * 60 * 60)) % 24);
         int milliseconds = (int) (elapsedTime % 1000);
-        float calory=0;
+        int calory=0;
         if (activity_title.contains("ランニング")&&cal==1){
-            calory = seconds*8.1f*60/3600;
+            calory = seconds*8*60/3600;
         }else if(activity_title.contains("ウォーキング")&&cal==1){
-            calory = seconds*3.1f*60/3600;
+            calory = seconds*3*60/3600;
         }
 
-        calory_data = String.format("%.1f", calory);
+        calory_data = String.format("%d", calory);
         String timeText = String.format("時間: %02d:%02d:%02d:%02d", hours, minutes, seconds, milliseconds);
         locationTextView.setText(formattedDate+"\n" +activity_title+ "\n" +"距離："+distancesam +"km"+ "\n" + timeText+"\n"+"カロリー:"+calory_data+"kcal"); // 時間を追加
     }

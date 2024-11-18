@@ -78,4 +78,11 @@
         android:layout_height="wrap_content"
         android:text="戻る"/>
 
+
+    <Button
+        android:id="@+id/ListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="目標一覧"/>
+
 </LinearLayout>
